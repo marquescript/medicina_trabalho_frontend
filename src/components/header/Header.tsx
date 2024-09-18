@@ -15,14 +15,17 @@ export const Header = () => {
     return (
 
         <div className="header">
-           <div className="header-title">Medicina do trabalho</div>
-           <div>
-           {buttons.map((button) => (
-                    <button key={button} onClick={() => handleAddButton(button)} className="button-header">
-                        {button}
-                    </button>
-                ))}
-           </div>
+            <div className="content-header">
+            <div className="header-title">Medicina do trabalho</div>
+            <div>
+            {buttons.map((button) => (
+                        <button key={button} onClick={() => handleAddButton(button)} className="button-header">
+                            {button}
+                        </button>
+                    ))}
+            </div>
+
+            </div>
         </div>
     )
 

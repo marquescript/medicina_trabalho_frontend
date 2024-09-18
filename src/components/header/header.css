@@ -2,16 +2,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100vw;
     margin: auto;
+    background-color: #4797ff; 
+
+}
+
+.content-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 80px;
+    margin: auto;
     padding-left: 20px;
     padding-right: 20px;
-    background-color: #4797ff; 
+    width: 1400px;
+    max-width: 1200px; 
+
 }
 
 .header-title {
-    font-size: 32px; 
+    font-size: 28px; 
     font-weight: bold;
     font-family: Arial, sans-serif; 
     color: white; 
@@ -24,8 +34,8 @@
     color: white;
     border: none; 
     border-radius: 5px; 
-    padding: 10px 15px; 
-    font-size: 16px; 
+    padding: 8px 10px; 
+    font-size: 14px; 
     cursor: pointer; 
     transition: background-color 0.3s; 
     margin: 5px;

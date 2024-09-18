@@ -1,48 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./table.css";
 import { TabelaGenerica } from "./TabelaGenerica";
 import { Consulta } from "../../types/Consulta";
+import { api } from "../../utils/api";
 
 export const TabelaConsultas = () => {
-    const [consulta] = useState<Consulta[]>([
-        {
-            id: 1,
-            funcionario: {
-                id: 1,
-                nome: "João",
-                cpf: "12345678901",
-                telefone: "123456789",
-                ocupacao: "Desenvolvedor",
-                empresa: { id: 1, nome_fantasia: "Empresa X", cnpj: "", razao_social: "" }
-            },
-            medico: { id: 1, nome: "aaaa", crm: "4234234", especialidade: "asdad" },
-            data_consulta: new Date(),
-            exame: {
-                id: 1,
-                tipo_exame: "aa",
-                valor_exame: ""
-            }
+    const [consulta, setConsulta] = useState<Consulta[]>([]);
+
+    const getConsultas = async () => {
+        try {
+            const response = await api.get("/consulta?item=10");
+            console.log(response.data);
+            setConsulta(response.data.data);
+        } catch (error) {
+            if (error instanceof Error) console.log(error.message);
         }
-    ]);
+    };
+
+    useEffect(() => {
+        getConsultas();
+    }, []);
 
     const colunas = {
         funcionario: {
             label: "Funcionário",
-            render: (item: Consulta) => item.funcionario.nome
+            render: (item: Consulta) => item?.funcionario?.nome || "Não disponível"
         },
         medico: {
             label: "Médico",
-            render: (item: Consulta) => item.medico.nome
+            render: (item: Consulta) => item?.medico?.nome || "Não disponível"
         },
         data_consulta: {
             label: "Data da Consulta",
-            render: (item: Consulta) => item.data_consulta.toLocaleDateString()
+            render: (item: Consulta) => {
+                const data = item?.data_consulta;
+                return data ? new Date(data).toLocaleDateString() : "Data não disponível";
+            }
         },
         exame: {
             label: "Exame",
-            render: (item: Consulta) => item.exame.tipo_exame
+            render: (item: Consulta) => item?.exame?.tipo_exame || "Não disponível"
         }
     };
+    
 
     return (
         <TabelaGenerica dados={consulta} colunas={colunas} entidade={"Consultas"} />

@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Empresa } from "../../types/Empresa";
 import "./table.css";
 import { TabelaGenerica } from "./TabelaGenerica";
+import { api } from "../../utils/api";
 
 export const TabelaEmpresas = () => {
-    const [empresa] = useState<Empresa[]>([
-        { id: 1, nome_fantasia: "Empresa X", cnpj: "4234234234", razao_social: "aaaaaaaaaa" },
-        { id: 2, nome_fantasia: "Empresa Y", cnpj: "5345345555", razao_social: "bbbbbbbbbb" },
-        { id: 3, nome_fantasia: "Empresa Z", cnpj: "7677775666", razao_social: "cccccccccc" }
-    ]);
+    const [empresa, setEmpresa] = useState<Empresa[]>([]);
+
+    const getEmpresas = async () => {
+        try {
+            const response = await api.get("/empresa?item=10");
+            setEmpresa(response.data.data);
+        } catch (error) {
+            if (error instanceof Error) console.log(error.message);
+        }
+    };
+
+    useEffect(() => {
+      getEmpresas();
+    }, []);
 
     const colunas = {
         nome_fantasia: {

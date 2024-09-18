@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Exame } from "../../types/Exame";
 import { TabelaGenerica } from "./TabelaGenerica";
+import { api } from "../../utils/api";
 
 export const TabelaExames = () => {
-    const [exames] = useState<Exame[]>([
-        { id: 1, tipo_exame: "Exame de Sangue", valor_exame: "150" },
-        { id: 2, tipo_exame: "Exame de Urina", valor_exame: "80" },
-        { id: 3, tipo_exame: "Raio-X", valor_exame: "200" }
-    ]);
+    const [exames, setExames] = useState<Exame[]>([]);
+
+    const getExames = async () => {
+        try {
+            const response = await api.get("/exame?item=10");
+            setExames(response.data.data);
+        } catch (error) {
+            if (error instanceof Error) console.log(error.message);
+        }
+    };
+
+    useEffect(() => {
+        getExames();
+    }, []);
 
     const colunas = {
         tipo_exame: {
@@ -16,7 +26,7 @@ export const TabelaExames = () => {
         },
         valor_exame: {
             label: "Valor do Exame",
-            render: (item: Exame) => item.valor_exame
+            render: (item: Exame) => `R$ ${item.valor_exame}`
         }
     };
 

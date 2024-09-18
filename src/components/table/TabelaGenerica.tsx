@@ -18,6 +18,8 @@ export const TabelaGenerica = <T extends Record<string, any>>({
 }: TabelaProps<T>) => {
     const headers = Object.keys(colunas);
 
+    const safeDados = Array.isArray(dados) ? dados : [];
+
     return (
         <div className="container">
             <h2>Lista de {entidade}</h2>
@@ -30,7 +32,7 @@ export const TabelaGenerica = <T extends Record<string, any>>({
                     </tr>
                 </thead>
                 <tbody>
-                    {dados.map((item) => (
+                    {safeDados.map((item) => (
                         <tr key={item.id}>
                             {headers.map((header) => (
                                 <td key={header}>

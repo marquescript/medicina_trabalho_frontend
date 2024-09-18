@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Funcionario } from "../../types/Funcionario";
 import { TabelaGenerica } from "./TabelaGenerica";
+import { api } from "../../utils/api";
 
 export const TabelaFuncionarios = () => {
-    const [funcionarios] = useState<Funcionario[]>([
-        {
-            id: 1,
-            nome: "João",
-            cpf: "12345678901",
-            telefone: "123456789",
-            ocupacao: "Desenvolvedor",
-            empresa: { id: 1, nome_fantasia: "Empresa X", cnpj: "", razao_social: "" }
+    const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
+
+    const getFuncionarios = async () => {
+        try {
+            const response = await api.get("/funcionario?item=10");
+            setFuncionarios(response.data.data);
+        } catch (error) {
+            if (error instanceof Error) console.log(error.message);
         }
-    ]);
+    };
+
+    useEffect(() => {
+        getFuncionarios();
+    }, []);
 
     const colunas = {
         nome: {
