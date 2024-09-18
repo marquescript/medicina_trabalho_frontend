@@ -12,7 +12,6 @@ export const Header = () => {
         buttonCtx?.addSelectedValue(value);
     }
 
-
     return (
 
         <div className="header">
