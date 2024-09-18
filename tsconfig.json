@@ -1,0 +1,14 @@
+{ 
+  "compilerOptions": {
+  "target": "es5",
+  "module": "commonjs",
+  "jsx": "react-jsx", // ou "react"
+  "strict": true,
+  // outras opções...
+},
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
