@@ -8,7 +8,7 @@ export const TabelaFuncionarios = () => {
 
     const getFuncionarios = async () => {
         try {
-            const response = await api.get("/funcionario?item=10");
+            const response = await api.get("/funcionario?items=10");
             setFuncionarios(response.data.data);
         } catch (error) {
             if (error instanceof Error) console.log(error.message);

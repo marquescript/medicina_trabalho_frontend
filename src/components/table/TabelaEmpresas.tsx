@@ -9,7 +9,7 @@ export const TabelaEmpresas = () => {
 
     const getEmpresas = async () => {
         try {
-            const response = await api.get("/empresa?item=10");
+            const response = await api.get("/empresa?items=10");
             setEmpresa(response.data.data);
         } catch (error) {
             if (error instanceof Error) console.log(error.message);

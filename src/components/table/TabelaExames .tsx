@@ -8,7 +8,7 @@ export const TabelaExames = () => {
 
     const getExames = async () => {
         try {
-            const response = await api.get("/exame?item=10");
+            const response = await api.get("/exame?items=10");
             setExames(response.data.data);
         } catch (error) {
             if (error instanceof Error) console.log(error.message);

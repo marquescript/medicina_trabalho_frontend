@@ -8,8 +8,7 @@ export const TabelaEmissoesAtestado = () => {
 
     const getAtestados = async () => {
         try {
-            const response = await api.get("/atestado?item=10");
-            console.log(response.data);
+            const response = await api.get("/atestado?items=10");
             setEmissoes(response.data.data);
         } catch (error) {
             if (error instanceof Error) console.log(error.message);

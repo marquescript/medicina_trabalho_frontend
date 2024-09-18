@@ -9,8 +9,7 @@ export const TabelaConsultas = () => {
 
     const getConsultas = async () => {
         try {
-            const response = await api.get("/consulta?item=10");
-            console.log(response.data);
+            const response = await api.get("/consulta?items=10");
             setConsulta(response.data.data);
         } catch (error) {
             if (error instanceof Error) console.log(error.message);

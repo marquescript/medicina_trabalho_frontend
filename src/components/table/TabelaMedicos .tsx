@@ -8,7 +8,7 @@ export const TabelaMedicos = () => {
 
     const getMedicos = async () => {
         try {
-            const response = await api.get("/medico?item=10");
+            const response = await api.get("/medico?items=10");
             setMedicos(response.data.data);
         } catch (error) {
             if (error instanceof Error) console.log(error.message);
